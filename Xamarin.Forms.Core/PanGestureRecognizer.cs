@@ -17,25 +17,37 @@ namespace Xamarin.Forms
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public void SendPan(Element sender, double totalX, double totalY, int gestureId)
 		{
-			PanUpdated?.Invoke(sender, new PanUpdatedEventArgs(GestureStatus.Running, gestureId, totalX, totalY));
+			if (IsEnabled)
+			{
+				PanUpdated?.Invoke(sender, new PanUpdatedEventArgs(GestureStatus.Running, gestureId, totalX, totalY));
+			}
 		}
 
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public void SendPanCanceled(Element sender, int gestureId)
 		{
-			PanUpdated?.Invoke(sender, new PanUpdatedEventArgs(GestureStatus.Canceled, gestureId));
+			if (IsEnabled)
+			{
+				PanUpdated?.Invoke(sender, new PanUpdatedEventArgs(GestureStatus.Canceled, gestureId));
+			}
 		}
 
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public void SendPanCompleted(Element sender, int gestureId)
 		{
-			PanUpdated?.Invoke(sender, new PanUpdatedEventArgs(GestureStatus.Completed, gestureId));
+			if (IsEnabled)
+			{
+				PanUpdated?.Invoke(sender, new PanUpdatedEventArgs(GestureStatus.Completed, gestureId));
+			}
 		}
 
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public void SendPanStarted(Element sender, int gestureId)
 		{
-			PanUpdated?.Invoke(sender, new PanUpdatedEventArgs(GestureStatus.Started, gestureId));
+			if (IsEnabled)
+			{
+				PanUpdated?.Invoke(sender, new PanUpdatedEventArgs(GestureStatus.Started, gestureId));
+			}
 		}
 
 		public event EventHandler<PanUpdatedEventArgs> PanUpdated;

@@ -54,12 +54,15 @@ namespace Xamarin.Forms
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public void SendClicked(View sender, ButtonsMask buttons)
 		{
-			ICommand cmd = Command;
-			object parameter = CommandParameter;
-			if (cmd != null && cmd.CanExecute(parameter))
-				cmd.Execute(parameter);
+			if (IsEnabled)
+			{
+				ICommand cmd = Command;
+				object parameter = CommandParameter;
+				if (cmd != null && cmd.CanExecute(parameter))
+					cmd.Execute(parameter);
 
-			Clicked?.Invoke(sender, new ClickedEventArgs(buttons, parameter));
+				Clicked?.Invoke(sender, new ClickedEventArgs(buttons, parameter));
+			}
 
 		}
 	}

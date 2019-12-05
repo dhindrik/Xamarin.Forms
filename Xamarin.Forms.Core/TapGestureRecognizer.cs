@@ -39,19 +39,23 @@ namespace Xamarin.Forms
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public void SendTapped(View sender)
 		{
-			ICommand cmd = Command;
-			if (cmd != null && cmd.CanExecute(CommandParameter))
-				cmd.Execute(CommandParameter);
+			if (IsEnabled)
+			{
 
-			EventHandler handler = Tapped;
-			if (handler != null)
-				handler(sender, new TappedEventArgs(CommandParameter));
+				ICommand cmd = Command;
+				if (cmd != null && cmd.CanExecute(CommandParameter))
+					cmd.Execute(CommandParameter);
+
+				EventHandler handler = Tapped;
+				if (handler != null)
+					handler(sender, new TappedEventArgs(CommandParameter));
 
 #pragma warning disable 0618 // retain until TappedCallback removed
-			Action<View, object> callback = TappedCallback;
-			if (callback != null)
-				callback(sender, TappedCallbackParameter);
+				Action<View, object> callback = TappedCallback;
+				if (callback != null)
+					callback(sender, TappedCallbackParameter);
 #pragma warning restore
+			}
 		}
 
 		#region obsolete cruft

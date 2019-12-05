@@ -85,11 +85,14 @@ namespace Xamarin.Forms
 
 		public void SendSwiped(View sender, SwipeDirection direction)
 		{
-			ICommand cmd = Command;
-			if (cmd != null && cmd.CanExecute(CommandParameter))
-				cmd.Execute(CommandParameter);
+			if (IsEnabled)
+			{
+				ICommand cmd = Command;
+				if (cmd != null && cmd.CanExecute(CommandParameter))
+					cmd.Execute(CommandParameter);
 
-			Swiped?.Invoke(sender, new SwipedEventArgs(CommandParameter, direction));
+				Swiped?.Invoke(sender, new SwipedEventArgs(CommandParameter, direction));
+			}
 		}
 	}
 

@@ -12,45 +12,60 @@ namespace Xamarin.Forms
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public void SendPinch(Element sender, double delta, Point currentScalePoint)
 		{
-			EventHandler<PinchGestureUpdatedEventArgs> handler = PinchUpdated;
-			if (handler != null)
+			if (IsEnabled)
 			{
-				handler(sender, new PinchGestureUpdatedEventArgs(GestureStatus.Running, delta, currentScalePoint));
+				EventHandler<PinchGestureUpdatedEventArgs> handler = PinchUpdated;
+				if (handler != null)
+				{
+					handler(sender, new PinchGestureUpdatedEventArgs(GestureStatus.Running, delta, currentScalePoint));
+				}
+				IsPinching = true;
 			}
-			IsPinching = true;
 		}
 
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public void SendPinchCanceled(Element sender)
 		{
-			EventHandler<PinchGestureUpdatedEventArgs> handler = PinchUpdated;
-			if (handler != null)
+			if (true)
 			{
-				handler(sender, new PinchGestureUpdatedEventArgs(GestureStatus.Canceled));
+				EventHandler<PinchGestureUpdatedEventArgs> handler = PinchUpdated;
+				if (handler != null)
+				{
+					handler(sender, new PinchGestureUpdatedEventArgs(GestureStatus.Canceled));
+				}
+
+				IsPinching = false;
 			}
-			IsPinching = false;
 		}
 
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public void SendPinchEnded(Element sender)
 		{
-			EventHandler<PinchGestureUpdatedEventArgs> handler = PinchUpdated;
-			if (handler != null)
+			if (IsEnabled)
 			{
-				handler(sender, new PinchGestureUpdatedEventArgs(GestureStatus.Completed));
+				EventHandler<PinchGestureUpdatedEventArgs> handler = PinchUpdated;
+				if (handler != null)
+				{
+					handler(sender, new PinchGestureUpdatedEventArgs(GestureStatus.Completed));
+				}
+				IsPinching = false;
 			}
-			IsPinching = false;
 		}
 
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public void SendPinchStarted(Element sender, Point initialScalePoint)
 		{
-			EventHandler<PinchGestureUpdatedEventArgs> handler = PinchUpdated;
-			if (handler != null)
+			if (IsEnabled)
 			{
-				handler(sender, new PinchGestureUpdatedEventArgs(GestureStatus.Started, 1, initialScalePoint));
+				EventHandler<PinchGestureUpdatedEventArgs> handler = PinchUpdated;
+				if (handler != null)
+				{
+					handler(sender, new PinchGestureUpdatedEventArgs(GestureStatus.Started, 1, initialScalePoint));
+				}
+
+				IsPinching = true;
 			}
-			IsPinching = true;
+			
 		}
 
 		public event EventHandler<PinchGestureUpdatedEventArgs> PinchUpdated;
